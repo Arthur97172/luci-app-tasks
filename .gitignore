@@ -1,0 +1,4 @@
+# Local only: design docs and the host-side test script are not part of the
+# published package.
+/docs/
+/tests/
