@@ -161,6 +161,16 @@
 
 /* --- Internet access control ------------------------------------------- */
 
+/* The "Access control" master switch mirrors the "Master switch" card at the
+ * bottom of the scheduled page. Argon and Bootstrap right-align an option
+ * title inside a fixed-width column, so this short title would otherwise
+ * start further right than the long scheduled label. Align it to the left so
+ * both rows start at the same place; the checkbox keeps the shared field
+ * position, exactly like the scheduled master switch. */
+#cbi-tasks-access-enabled > .cbi-value-title {
+	text-align: left;
+}
+
 /* list of devices that are currently cut off from the internet */
 .tasks-access-devices {
 	margin: .25rem 0 .75rem;

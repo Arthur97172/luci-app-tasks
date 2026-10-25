@@ -166,10 +166,26 @@ return view.extend({
 
 		var hosts = (data[1] && data[1].hosts) ? data[1].hosts : {};
 
-		var m = new form.Map('tasks', _('Internet Access Control'),
+		var m = new form.Map('tasks', '');
+
+		/* form.Map always renders its description above every card. The hint
+		 * belongs between the master switch and the device cards, so it is
+		 * created here and placed into the rendered form instead. Saving
+		 * redraws the map contents, which is why placeHint() also runs after
+		 * every save. */
+		var hint = E('div', { 'class': 'cbi-map-descr tasks-access-hint' },
 			_('Block internet access for selected devices outside their allowed time window. A blocked device can still reach the router itself. The rule is checked every minute; no cron syntax or shell command is needed.'));
 
+		function placeHint() {
+			var node = m.root ? m.root.querySelector('#cbi-tasks-access') : null;
+			var card = node ? node.closest('.cbi-section') : null;
+
+			if (card && card.parentNode === m.root)
+				m.root.insertBefore(hint, card.nextSibling);
+		}
+
 		this.map = m;
+		this.placeHint = placeHint;
 
 		/* --- Global switch --------------------------------------------- */
 		var s = m.section(form.NamedSection, 'access', 'access',
@@ -326,11 +342,33 @@ return view.extend({
 		L.Poll.add(refreshStatus, 10);
 
 		return m.render().then(function(formNode) {
+			placeHint();
+
 			return E('div', {}, [ status, masterWarn, formNode ]);
 		});
 	},
 
+	/* Saving redraws the form contents, so the hint inserted between the
+	 * cards has to be put back afterwards. Reset redraws them too. */
+	handleSave: function(ev) {
+		var self = this;
+
+		return this.map.save().then(function() {
+			self.placeHint();
+		});
+	},
+
+	handleReset: function(ev) {
+		var self = this;
+
+		return this.map.reset().then(function() {
+			self.placeHint();
+		});
+	},
+
 	handleSaveApply: function(ev, mode) {
+		var self = this;
+
 		function applyNow() {
 			document.removeEventListener('uci-applied', applyNow);
 
@@ -359,6 +397,7 @@ return view.extend({
 		document.addEventListener('uci-applied', applyNow);
 
 		return this.map.save().then(function() {
+			self.placeHint();
 			ui.changes.apply(mode == '0');
 		}, function(err) {
 			/* Validation failed, no commit will happen: drop the listener so
