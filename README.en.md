@@ -16,6 +16,8 @@ four pages:
 | Internet Access Control | Cut selected MAC/IP devices off the internet outside their allowed time window, checked every minute |
 | Execution Log | Live log of scheduled, manual and access-control runs, with clear / download |
 
+![Tasks interface screenshot](screenshot.png)
+
 ## Installation
 
 ### From Releases
