@@ -156,8 +156,8 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: htdocs/luci-static/resources/view/tasks/scheduled.js:233
-msgid "Enable all scheduled tasks, startup entries and access control"
+#: htdocs/luci-static/resources/view/tasks/scheduled.js:246
+msgid "Enable scheduled tasks"
 msgstr ""
 
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:356

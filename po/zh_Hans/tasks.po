@@ -200,8 +200,8 @@ msgstr "总开关"
 msgid "When disabled, all scheduled tasks, startup entries and access control rules are skipped, but their settings are kept."
 msgstr "关闭后，所有定时任务、开机启动项和上网控制规则都会跳过执行，但设置会保留。"
 
-msgid "Enable all scheduled tasks, startup entries and access control"
-msgstr "启用所有定时任务、开机启动项和上网控制"
+msgid "Enable scheduled tasks"
+msgstr "启用定时任务"
 
 msgid "Cron entries written by this application will appear here after saving."
 msgstr "保存后，本应用生成的 cron 条目会显示在这里。"

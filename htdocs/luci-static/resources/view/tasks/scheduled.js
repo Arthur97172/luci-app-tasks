@@ -243,7 +243,7 @@ return view.extend({
 		s = m.section(form.NamedSection, 'global', 'global', _('Master switch'),
 			_('When disabled, all scheduled tasks, startup entries and access control rules are skipped, but their settings are kept.'));
 
-		o = s.option(form.Flag, 'enabled', _('Enable all scheduled tasks, startup entries and access control'));
+		o = s.option(form.Flag, 'enabled', _('Enable scheduled tasks'));
 		o.rmempty = false;
 		o.default = '1';
 
