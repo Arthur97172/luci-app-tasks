@@ -26,6 +26,14 @@
 			"path": "tasks/startup"
 		}
 	},
+	"admin/system/tasks/access": {
+		"title": "Internet Access Control",
+		"order": 25,
+		"action": {
+			"type": "view",
+			"path": "tasks/access"
+		}
+	},
 	"admin/system/tasks/log": {
 		"title": "Execution Log",
 		"order": 30,

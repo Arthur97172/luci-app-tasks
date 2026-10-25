@@ -5,7 +5,8 @@ mkdir -p /etc/tasks
 [ -f /etc/tasks/tasks.log ] || : >/etc/tasks/tasks.log
 
 # Make sure every fixed section exists even if the user has an old config.
-for section in global reboot network firewall cleantmp clearmem; do
+# wifion / wifioff were added in 1.1.0; the generic loop covers them too.
+for section in global reboot network firewall cleantmp clearmem wifion wifioff; do
 	if ! uci -q get "tasks.$section" >/dev/null 2>&1; then
 		if [ "$section" = "global" ]; then
 			uci set tasks.global=global
@@ -17,6 +18,12 @@ done
 
 if ! uci -q get tasks.global.enabled >/dev/null 2>&1; then
 	uci set tasks.global.enabled='1'
+fi
+
+# Access control was added in 1.1.0; older configurations have no section.
+if ! uci -q get tasks.access >/dev/null 2>&1; then
+	uci set tasks.access=access
+	uci set tasks.access.enabled='0'
 fi
 
 uci commit tasks

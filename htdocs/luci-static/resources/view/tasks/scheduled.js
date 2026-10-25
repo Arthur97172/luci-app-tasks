@@ -34,7 +34,9 @@ var ACTION_LABELS = {
 	network:  _('Restart network'),
 	firewall: _('Restart firewall'),
 	cleantmp: _('Clean temporary files'),
-	clearmem: _('Free memory')
+	clearmem: _('Free memory'),
+	wifion:   _('Turn WiFi on'),
+	wifioff:  _('Turn WiFi off')
 };
 
 var ACTION_BUTTONS = {
@@ -45,13 +47,15 @@ var ACTION_BUTTONS = {
 	clearmem: _('Free memory now')
 };
 
-var TASK_NAMES = [ 'reboot', 'network', 'firewall', 'cleantmp', 'clearmem' ];
+var TASK_NAMES = [
+	'reboot', 'network', 'firewall', 'cleantmp', 'clearmem', 'wifion', 'wifioff'
+];
 
 /* Set in render(), read by the task picker and by handleReset(). */
 var selectedTask = TASK_NAMES[0];
 var mapRoot = null;
 
-/* All five task cards stay in the form so that saving keeps every task's
+/* All task cards stay in the form so that saving keeps every task's
  * settings; the picker only decides which card is visible. */
 function showSelectedTask()
 {
@@ -86,7 +90,7 @@ function numberChoices(o, from, to, width)
 }
 
 /* Attach the shared "when to run" controls to a task section. */
-function addScheduleOptions(s, defaultMode)
+function addScheduleOptions(s, defaultMode, defaultHour)
 {
 	var o;
 
@@ -106,7 +110,7 @@ function addScheduleOptions(s, defaultMode)
 
 	o = s.option(form.ListValue, 'hour', _('Hour'));
 	numberChoices(o, 0, 23, 2);
-	o.default = '3';
+	o.default = defaultHour || '3';
 	o.rmempty = false;
 	o.retain = true;
 	o.depends('mode', 'daily');
@@ -226,11 +230,20 @@ return view.extend({
 			_('Releases cached file data from RAM. Safe to run at any time, but running it very often can slow the device down.'));
 		addScheduleOptions(s, 'interval_hours');
 
+		/* --- WiFi ------------------------------------------------------- */
+		s = m.section(form.NamedSection, 'wifion', 'task', _('Scheduled WiFi on'),
+			_('Turn all wireless radios on at the scheduled time. The setting is kept across reboots.'));
+		addScheduleOptions(s, 'daily', '7');
+
+		s = m.section(form.NamedSection, 'wifioff', 'task', _('Scheduled WiFi off'),
+			_('Turn all wireless radios off at the scheduled time. Wired devices and the router itself keep working. The setting is kept across reboots.'));
+		addScheduleOptions(s, 'daily', '23');
+
 		/* --- Global switch ---------------------------------------------- */
 		s = m.section(form.NamedSection, 'global', 'global', _('Master switch'),
-			_('When disabled, all scheduled tasks and all startup entries are skipped, but their settings are kept.'));
+			_('When disabled, all scheduled tasks, startup entries and access control rules are skipped, but their settings are kept.'));
 
-		o = s.option(form.Flag, 'enabled', _('Enable all scheduled tasks and startup entries'));
+		o = s.option(form.Flag, 'enabled', _('Enable all scheduled tasks, startup entries and access control'));
 		o.rmempty = false;
 		o.default = '1';
 
@@ -353,7 +366,7 @@ return view.extend({
 		var status = E('div', { 'class': 'cbi-section' }, [
 			E('h3', {}, _('Status')),
 			E('p', { 'class': 'tasks-status' }, [
-				E('span', {}, [ _('Enabled tasks'), ': ', enabledCount, ' / 5' ]),
+				E('span', {}, [ _('Enabled tasks'), ': ', enabledCount, ' / ' + TASK_NAMES.length ]),
 				E('span', {}, [ _('Generated cron entries'), ': ', cronCount ]),
 				E('button', {
 					'class': 'cbi-button cbi-button-neutral',
@@ -374,6 +387,16 @@ return view.extend({
 			refreshCron();
 
 			return E('div', {}, [ status, toolbar, picker, formNode ]);
+		});
+	},
+
+	/* Map.save() redraws the form contents, which replaces the task cards
+	 * with fresh nodes and drops the inline display styles applied by the
+	 * picker. Without this, all task cards spread out until the page is
+	 * rendered again. */
+	handleSave: function(ev) {
+		return this.map.save().then(function() {
+			showSelectedTask();
 		});
 	},
 
@@ -400,7 +423,7 @@ return view.extend({
 
 		document.addEventListener('uci-applied', applyNow);
 
-		return this.map.save().then(function() {
+		return this.handleSave(ev).then(function() {
 			ui.changes.apply(mode == '0');
 		}, function(err) {
 			/* Validation failed, no commit will happen: drop the listener so

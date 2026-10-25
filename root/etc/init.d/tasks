@@ -7,7 +7,7 @@ STOP=10
 
 . /usr/lib/tasks/common.sh
 
-TASKS_ACTIONS="reboot network firewall cleantmp clearmem"
+TASKS_ACTIONS="reboot network firewall cleantmp clearmem wifion wifioff"
 
 # Make sure a cron daemon is actually running while jobs exist. Enabling the
 # initscript does not touch existing crontab entries of other packages.
@@ -55,6 +55,15 @@ generate_cron() {
 		printf '%s /usr/bin/tasks-handler run %s # %s:%s\n' \
 			"$expr" "$action" "$TASKS_MARK" "$action" >>"$TASKS_CRON"
 	done
+
+	# Access control has to be re-evaluated every minute so devices are cut
+	# off exactly when their allowed window ends.
+	if [ "$(tasks_cfg global enabled 1)" = "1" ] &&
+			[ "$(tasks_cfg access enabled 0)" = "1" ] &&
+			tasks_access_has_devices; then
+		printf '* * * * * /usr/bin/tasks-handler run access # %s:access\n' \
+			"$TASKS_MARK" >>"$TASKS_CRON"
+	fi
 }
 
 generate_startup() {
@@ -89,6 +98,7 @@ regen() {
 	generate_cron
 	generate_startup
 	cron_reload
+	/usr/bin/tasks-handler apply-access >>"$TASKS_LOG" 2>&1
 }
 
 start() {
@@ -100,6 +110,7 @@ stop() {
 	remove_generated
 	printf '#!/bin/sh\nexit 0\n' >"$TASKS_STARTUP"
 	chmod +x "$TASKS_STARTUP" 2>/dev/null
+	/usr/bin/tasks-handler stop-access >>"$TASKS_LOG" 2>&1
 	cron_reload
 	tasks_log init "service stopped, scheduled jobs removed"
 }

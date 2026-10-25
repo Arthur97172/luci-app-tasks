@@ -157,7 +157,7 @@ msgid "Enable"
 msgstr ""
 
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:233
-msgid "Enable all scheduled tasks and startup entries"
+msgid "Enable all scheduled tasks, startup entries and access control"
 msgstr ""
 
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:356
@@ -450,12 +450,194 @@ msgstr ""
 
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:231
 msgid ""
-"When disabled, all scheduled tasks and all startup entries are "
-"skipped, but their settings are kept."
+"When disabled, all scheduled tasks, startup entries and access "
+"control rules are skipped, but their settings are kept."
 msgstr ""
 
 #: htdocs/luci-static/resources/view/tasks/log.js:92
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:302
 #: htdocs/luci-static/resources/view/tasks/scheduled.js:308
 msgid "unknown error"
+msgstr ""
+
+#: root/usr/share/luci/menu.d/luci-app-tasks.json:24
+msgid "Internet Access Control"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid ""
+"Block internet access for selected devices outside their allowed "
+"time window. A blocked device can still reach the router itself. "
+"The rule is checked every minute; no cron syntax or shell command "
+"is needed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Access control"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid ""
+"When enabled, the devices below lose internet access outside their "
+"allowed window. Start and end are inclusive; if both are equal the "
+"whole day is allowed."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Enable access control"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Devices"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "New device"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "For example: kids tablet"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "MAC or IP address"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid ""
+"A MAC address is recommended: it also covers IPv6 and keeps "
+"working when DHCP assigns a new IP. An IPv4 address or subnet only "
+"blocks IPv4 traffic."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Enter a MAC address, an IPv4 address or an IPv4 subnet."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid ""
+"Enter a MAC address, an IPv4 address or an IPv4 subnet (for "
+"example 192.168.1.0/24)."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Mode"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Allowed during the time window"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Blocked all the time"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Days"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Start hour"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Start minute"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "End hour"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "End minute"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Access control is active."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Access control is disabled."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Access control could not be applied."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "The tasks service is not running."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Not applied yet. Save and apply the page to write the rules."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Firewall backend: %s"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "none"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Blocked devices: %s"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Last check: %s"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "never"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "unknown host"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "No device is blocked right now."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "The master switch is off, so access control will not run."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid "Access control applied. The firewall rules are up to date."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/access.js
+msgid ""
+"Configuration was saved, but the access rules could not be "
+"rebuilt. Reboot the device to retry."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid "Turn WiFi on"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid "Turn WiFi off"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid "Scheduled WiFi on"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid "Scheduled WiFi off"
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid ""
+"Turn all wireless radios on at the scheduled time. The setting is kept "
+"across reboots."
+msgstr ""
+
+#: htdocs/luci-static/resources/view/tasks/scheduled.js
+msgid ""
+"Turn all wireless radios off at the scheduled time. Wired devices and "
+"the router itself keep working. The setting is kept across reboots."
 msgstr ""

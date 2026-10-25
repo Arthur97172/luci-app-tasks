@@ -197,11 +197,11 @@ msgstr "将缓存的文件数据从内存中释放。随时可以安全执行，
 msgid "Master switch"
 msgstr "总开关"
 
-msgid "When disabled, all scheduled tasks and all startup entries are skipped, but their settings are kept."
-msgstr "关闭后，所有定时任务和开机启动项都会跳过执行，但设置会保留。"
+msgid "When disabled, all scheduled tasks, startup entries and access control rules are skipped, but their settings are kept."
+msgstr "关闭后，所有定时任务、开机启动项和上网控制规则都会跳过执行，但设置会保留。"
 
-msgid "Enable all scheduled tasks and startup entries"
-msgstr "启用所有定时任务和开机启动项"
+msgid "Enable all scheduled tasks, startup entries and access control"
+msgstr "启用所有定时任务、开机启动项和上网控制"
 
 msgid "Cron entries written by this application will appear here after saving."
 msgstr "保存后，本应用生成的 cron 条目会显示在这里。"
@@ -331,3 +331,126 @@ msgstr "最新在前"
 
 msgid "Updates automatically every 5 seconds."
 msgstr "每 5 秒自动更新。"
+
+msgid "Internet Access Control"
+msgstr "上网控制"
+
+msgid "Block internet access for selected devices outside their allowed time window. A blocked device can still reach the router itself. The rule is checked every minute; no cron syntax or shell command is needed."
+msgstr "在允许的时间段之外，禁止指定设备上网。被禁止的设备仍然可以访问路由器本身。规则每分钟检查一次，无需编写 cron 表达式或命令。"
+
+msgid "Access control"
+msgstr "上网控制"
+
+msgid "When enabled, the devices below lose internet access outside their allowed window. Start and end are inclusive; if both are equal the whole day is allowed."
+msgstr "启用后，下方设备在允许的时间段之外将无法上网。开始与结束时间均包含在内；两者相同时表示全天允许上网。"
+
+msgid "Enable access control"
+msgstr "启用上网控制"
+
+msgid "Devices"
+msgstr "设备"
+
+msgid "New device"
+msgstr "新设备"
+
+msgid "For example: kids tablet"
+msgstr "例如：孩子的平板"
+
+msgid "MAC or IP address"
+msgstr "MAC 或 IP 地址"
+
+msgid "A MAC address is recommended: it also covers IPv6 and keeps working when DHCP assigns a new IP. An IPv4 address or subnet only blocks IPv4 traffic."
+msgstr "建议使用 MAC 地址：它同时覆盖 IPv6，并且在 DHCP 重新分配 IP 后仍然有效。IPv4 地址或网段只会阻止 IPv4 流量。"
+
+msgid "Enter a MAC address, an IPv4 address or an IPv4 subnet."
+msgstr "请输入 MAC 地址、IPv4 地址或 IPv4 网段。"
+
+msgid "Enter a MAC address, an IPv4 address or an IPv4 subnet (for example 192.168.1.0/24)."
+msgstr "请输入 MAC 地址、IPv4 地址或 IPv4 网段（例如 192.168.1.0/24）。"
+
+msgid "Mode"
+msgstr "模式"
+
+msgid "Allowed during the time window"
+msgstr "在时间段内允许上网"
+
+msgid "Blocked all the time"
+msgstr "始终禁止上网"
+
+msgid "Days"
+msgstr "生效日期"
+
+msgid "Start hour"
+msgstr "开始小时"
+
+msgid "Start minute"
+msgstr "开始分钟"
+
+msgid "End hour"
+msgstr "结束小时"
+
+msgid "End minute"
+msgstr "结束分钟"
+
+msgid "Access control is active."
+msgstr "上网控制已生效。"
+
+msgid "Access control is disabled."
+msgstr "上网控制未启用。"
+
+msgid "Access control could not be applied."
+msgstr "上网控制规则应用失败。"
+
+msgid "The tasks service is not running."
+msgstr "任务管理服务未运行。"
+
+msgid "Not applied yet. Save and apply the page to write the rules."
+msgstr "尚未应用。请保存并应用本页以写入规则。"
+
+msgid "Firewall backend: %s"
+msgstr "防火墙后端：%s"
+
+msgid "none"
+msgstr "无"
+
+msgid "Blocked devices: %s"
+msgstr "已禁止设备：%s"
+
+msgid "Last check: %s"
+msgstr "最后检查：%s"
+
+msgid "never"
+msgstr "从未"
+
+msgid "unknown host"
+msgstr "未知主机"
+
+msgid "No device is blocked right now."
+msgstr "当前没有设备被禁止上网。"
+
+msgid "The master switch is off, so access control will not run."
+msgstr "总开关已关闭，上网控制不会运行。"
+
+msgid "Access control applied. The firewall rules are up to date."
+msgstr "上网控制已应用，防火墙规则已更新。"
+
+msgid "Configuration was saved, but the access rules could not be rebuilt. Reboot the device to retry."
+msgstr "配置已保存，但上网控制规则重建失败。请重启设备后重试。"
+
+msgid "Turn WiFi on"
+msgstr "开启WiFi"
+
+msgid "Turn WiFi off"
+msgstr "关闭WiFi"
+
+msgid "Scheduled WiFi on"
+msgstr "定时开启WiFi"
+
+msgid "Scheduled WiFi off"
+msgstr "定时关闭WiFi"
+
+msgid "Turn all wireless radios on at the scheduled time. The setting is kept across reboots."
+msgstr "按设定时间开启所有无线网络。该设置会在重启后保留。"
+
+msgid "Turn all wireless radios off at the scheduled time. Wired devices and the router itself keep working. The setting is kept across reboots."
+msgstr "按设定时间关闭所有无线网络。有线设备和路由器本身不受影响，该设置会在重启后保留。"
