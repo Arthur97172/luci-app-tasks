@@ -82,6 +82,7 @@ return view.extend({
 
 		var serviceOpt = s.option(form.ListValue, 'service', _('Service'));
 		serviceOpt.value('', _('-- Please choose a service --'));
+		serviceOpt.rmempty = false;
 		serviceOpt.depends('kind', 'service');
 
 		o = s.option(form.TextValue, 'command', _('Command'));
